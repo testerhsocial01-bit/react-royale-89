@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gamified Chat Design System - WhatsApp inspired with gaming elements */
+
+@layer base {
+  :root {
+    /* Chat Background System */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --chat-background: 218 23% 5%;
+    --chat-pattern: linear-gradient(45deg, hsl(218 23% 5%) 0%, hsl(218 23% 6%) 100%);
+    
+    /* WhatsApp-inspired Colors */
+    --whatsapp-primary: 142 70% 49%;
+    --whatsapp-dark: 142 70% 39%;
+    --whatsapp-light: 142 70% 59%;
+    
+    /* Message Bubbles */
+    --message-sent: 142 70% 49%;
+    --message-sent-foreground: 0 0% 98%;
+    --message-received: 220 14% 11%;
+    --message-received-foreground: 0 0% 98%;
+    
+    /* Reaction System */
+    --reaction-bg: 220 14% 14%;
+    --reaction-active: 45 93% 58%;
+    --reaction-hover: 220 14% 20%;
+    
+    /* Banner System */
+    --banner-legendary: linear-gradient(135deg, hsl(45 93% 58%) 0%, hsl(25 95% 53%) 100%);
+    --banner-epic: linear-gradient(135deg, hsl(271 81% 56%) 0%, hsl(312 73% 55%) 100%);
+    --banner-rare: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(142 70% 49%) 100%);
+    --banner-common: linear-gradient(135deg, hsl(0 0% 63%) 0%, hsl(0 0% 45%) 100%);
+    
+    /* Gamification Colors */
+    --like-heart: 348 83% 47%;
+    --crown-gold: 45 93% 58%;
+    --xp-blue: 217 91% 60%;
+
+    --card: 220 14% 11%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 14% 11%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 142 70% 49%;
+    --primary-foreground: 0 0% 3%;
+
+    --secondary: 220 14% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 14% 20%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 220 14% 20%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 14% 20%;
+    --input: 220 14% 15%;
+    --ring: 142 70% 49%;
+
+    --radius: 0.75rem;
+  }
+}
+
+/* Chat Animation System */
+@layer utilities {
+  .message-appear {
+    animation: message-slide-up 0.3s ease-out;
+  }
+  
+  .banner-glow {
+    animation: banner-pulse 2s ease-in-out infinite;
+  }
+  
+  .reaction-pop {
+    animation: reaction-bounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .crown-spin {
+    animation: crown-rotate 3s ease-in-out infinite;
+  }
+  
+  .chat-background {
+    background: hsl(var(--chat-background));
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--whatsapp-primary) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--whatsapp-primary) / 0.05) 0%, transparent 50%);
+  }
+  
+  .message-sent {
+    background: hsl(var(--message-sent));
+    color: hsl(var(--message-sent-foreground));
+  }
+  
+  .message-received {
+    background: hsl(var(--message-received));
+    color: hsl(var(--message-received-foreground));
+    border: 1px solid hsl(var(--border));
+  }
+  
+  .banner-legendary {
+    background: var(--banner-legendary);
+  }
+  
+  .banner-epic {
+    background: var(--banner-epic);
+  }
+  
+  .banner-rare {
+    background: var(--banner-rare);
+  }
+  
+  .banner-common {
+    background: var(--banner-common);
+  }
+  
+  .reaction-button {
+    background: hsl(var(--reaction-bg));
+    border: 1px solid hsl(var(--border));
+    transition: all 0.2s ease;
+  }
+  
+  .reaction-button:hover {
+    background: hsl(var(--reaction-hover));
+    transform: scale(1.1);
+  }
+  
+  .reaction-active {
+    background: hsl(var(--reaction-active));
+    transform: scale(1.15);
+  }
+
+  /* Like heart color utility */
+  .text-like-heart {
+    color: hsl(var(--like-heart));
+  }
+  
+  .bg-like-heart {
+    background: hsl(var(--like-heart));
+  }
+  
+  .bg-like-heart\/20 {
+    background: hsl(var(--like-heart) / 0.2);
+  }
+}
+
+@keyframes message-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes banner-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--crown-gold) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(var(--crown-gold) / 0.8);
+  }
+}
+
+@keyframes reaction-bounce {
+  0% {
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes crown-rotate {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground chat-background;
+  }
+}
