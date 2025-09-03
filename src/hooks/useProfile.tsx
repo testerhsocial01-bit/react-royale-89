@@ -51,7 +51,7 @@ export const useProfile = (userId?: string) => {
           userBanners: bannersData || [],
           messageCount: messageCount || 0,
           isTopUser,
-          bio: profileData?.bio || '', // Add bio field support
+          bio: profileData?.description || '', // Use description field from database
         };
 
         setProfile(enrichedProfile);
@@ -71,7 +71,7 @@ export const useProfile = (userId?: string) => {
     loadProfile();
   }, [targetUserId, toast]);
 
-  const updateProfile = async (updates: { name?: string; bio?: string; avatar_url?: string; avatar_emoji?: string }) => {
+  const updateProfile = async (updates: { bio?: string; avatar_url?: string; avatar_emoji?: string }) => {
     if (!user || !targetUserId || targetUserId !== user.id) {
       toast({
         title: "Error",
@@ -82,9 +82,16 @@ export const useProfile = (userId?: string) => {
     }
 
     try {
+      // Map bio to description field in database
+      const dbUpdates: any = { ...updates };
+      if (updates.bio !== undefined) {
+        dbUpdates.description = updates.bio;
+        delete dbUpdates.bio;
+      }
+
       const { error } = await (supabase as any)
         .from('profiles')
-        .update(updates)
+        .update(dbUpdates)
         .eq('id', targetUserId);
 
       if (error) {

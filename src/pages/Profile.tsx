@@ -31,7 +31,6 @@ const Profile = () => {
   
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
-    name: '',
     bio: '',
     avatar_emoji: ''
   });
@@ -66,7 +65,6 @@ const Profile = () => {
 
   const handleEditStart = () => {
     setEditData({
-      name: profile.name || '',
       bio: profile.bio || '',
       avatar_emoji: profile.avatar_emoji || '🧑‍💻'
     });
@@ -148,15 +146,6 @@ const Profile = () => {
                       </AvatarSelector>
                     </div>
                     <div>
-                      <Label htmlFor="name">Nombre</Label>
-                      <Input
-                        id="name"
-                        value={editData.name}
-                        onChange={(e) => setEditData(prev => ({ ...prev, name: e.target.value }))}
-                        placeholder="Tu nombre"
-                      />
-                    </div>
-                    <div>
                       <Label htmlFor="bio">Biografía</Label>
                       <Textarea
                         id="bio"
@@ -176,7 +165,7 @@ const Profile = () => {
                 ) : (
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <h1 className="text-3xl font-bold">{profile.name || 'Usuario'}</h1>
+                      <h1 className="text-3xl font-bold">{profile.username || 'Usuario'}</h1>
                       {isOwnProfile && (
                         <Button variant="outline" onClick={handleEditStart}>
                           Editar perfil

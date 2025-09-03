@@ -60,7 +60,7 @@ export const MessageBubble = ({
         <div className={`flex items-center gap-1 md:gap-2 mb-1 ${isOwn ? 'justify-end' : ''}`}>
           <div className="flex items-center gap-1">
             <span className="text-lg">{user.avatar_emoji || '🧑‍💻'}</span>
-            <span className="text-xs md:text-sm font-medium text-foreground">{user.name}</span>
+            <span className="text-xs md:text-sm font-medium text-foreground">{user.username || user.name}</span>
           </div>
           {user.temporaryBanner && (
             <UserBanner 

@@ -1,6 +1,7 @@
 export interface User {
   id: string;
-  name: string;
+  name?: string;
+  username?: string;
   avatar: string;
   avatar_emoji?: string;
   likes: number;

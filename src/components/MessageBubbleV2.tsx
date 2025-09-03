@@ -45,7 +45,7 @@ export const MessageBubbleV2 = ({
         <Avatar className="h-10 w-10 ring-2 ring-primary/20">
           <AvatarImage src={profile?.avatar_url} />
           <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/10 text-primary font-medium">
-            {profile?.avatar_emoji || profile?.name?.charAt(0)?.toUpperCase() || 'U'}
+            {profile?.avatar_emoji || profile?.username?.charAt(0)?.toUpperCase() || 'U'}
           </AvatarFallback>
         </Avatar>
 
@@ -80,7 +80,7 @@ export const MessageBubbleV2 = ({
           <div className="flex flex-col">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-sm font-semibold text-primary">
-                {profile?.name || 'Usuario'}
+                {profile?.username || 'Usuario'}
               </span>
               
               {/* Automatic Banners - Show with glow effect */}
@@ -126,7 +126,7 @@ export const MessageBubbleV2 = ({
                   variant="ghost"
                   size="sm"
                   className="h-5 w-5 p-0 hover:bg-primary/20"
-                  title={`Ver perfil de ${profile?.name}`}
+                  title={`Ver perfil de ${profile?.username}`}
                 >
                   <LinkIcon className="h-3 w-3" />
                 </Button>
