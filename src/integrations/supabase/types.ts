@@ -38,6 +38,33 @@ export type Database = {
         }
         Relationships: []
       }
+      banners: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          emoji: string
+          id: string
+          name: string
+          rarity: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          emoji: string
+          id: string
+          name: string
+          rarity: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          emoji?: string
+          id?: string
+          name?: string
+          rarity?: string
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string
@@ -237,6 +264,86 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      user_banners: {
+        Row: {
+          banner_id: string
+          id: string
+          is_active: boolean | null
+          unlocked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          banner_id: string
+          id?: string
+          is_active?: boolean | null
+          unlocked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          banner_id?: string
+          id?: string
+          is_active?: boolean | null
+          unlocked_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_banners_banner_id_fkey"
+            columns: ["banner_id"]
+            isOneToOne: false
+            referencedRelation: "banners"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_banners_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_daily_stats: {
+        Row: {
+          created_at: string | null
+          day: string
+          hearts_total: number | null
+          id: string
+          laughs_total: number | null
+          messages_sent_total: number | null
+          reactions_received_total: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          day: string
+          hearts_total?: number | null
+          id?: string
+          laughs_total?: number | null
+          messages_sent_total?: number | null
+          reactions_received_total?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          day?: string
+          hearts_total?: number | null
+          id?: string
+          laughs_total?: number | null
+          messages_sent_total?: number | null
+          reactions_received_total?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_daily_stats_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
